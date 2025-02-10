@@ -29,11 +29,12 @@ public class RecipeFileHandler {
      */
     public ArrayList<String> readRecipes() {
         String line;
+        ArrayList<String> food = new ArrayList<>();
         try(BufferedReader reader = new BufferedReader(new FileReader(this.filePath))){
-            ArrayList<String> food = new ArrayList<>();
-            if(reader.readLine().equals("")){
+            if((line = (reader.readLine())) == null){
                 return null;
-            }else{
+            }
+            
             while((line = (reader.readLine())) != null){
                 
                 String[] foods = line.split(",");
@@ -42,14 +43,14 @@ public class RecipeFileHandler {
 
   
             }
-
-        }
+            return food;
+            
         } catch (IOException e) {
             System.out.println("Error reading file:" + e.getMessage());
         }
-        
         return null;
-    }
+        }
+    
 
     /**
      * 設問2: 新規登録機能
