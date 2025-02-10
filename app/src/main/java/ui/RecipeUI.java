@@ -65,8 +65,10 @@ public class RecipeUI {
      * RecipeFileHandlerから読み込んだレシピデータを整形してコンソールに表示します。
      */
     private void displayRecipes() {
-        if(fileHandler.readRecipes() != null){
+      try{  
         ArrayList<String> food = fileHandler.readRecipes();
+        
+        
         System.out.println("Recipes:");
         for(int i = 0; i < food.size(); i++){
             String[] foods = food.get(i).split(",");
@@ -82,7 +84,7 @@ public class RecipeUI {
         System.out.println();
     }
     System.out.println("-----------------------------------");
-}else{
+}catch(NullPointerException e){
     System.out.println("No recipes available.");
 }
     }

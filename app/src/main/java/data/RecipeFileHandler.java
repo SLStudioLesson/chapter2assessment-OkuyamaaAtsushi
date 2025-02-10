@@ -31,6 +31,9 @@ public class RecipeFileHandler {
         String line;
         try(BufferedReader reader = new BufferedReader(new FileReader(this.filePath))){
             ArrayList<String> food = new ArrayList<>();
+            if(reader.readLine().equals("")){
+                return null;
+            }else{
             while((line = (reader.readLine())) != null){
                 
                 String[] foods = line.split(",");
@@ -39,10 +42,12 @@ public class RecipeFileHandler {
 
   
             }
-            return food;
+
+        }
         } catch (IOException e) {
             System.out.println("Error reading file:" + e.getMessage());
         }
+        
         return null;
     }
 
