@@ -22,6 +22,7 @@ public class RecipeUI {
     }
 
     public void displayMenu() {
+
         while (true) {
             try {
                 System.out.println();
@@ -36,7 +37,7 @@ public class RecipeUI {
 
                 switch (choice) {
                     case "1":
-                        // 設問1: 一覧表示機能
+                    displayRecipes();
                         break;
                     case "2":
                         // 設問2: 新規登録機能
@@ -62,7 +63,26 @@ public class RecipeUI {
      * RecipeFileHandlerから読み込んだレシピデータを整形してコンソールに表示します。
      */
     private void displayRecipes() {
-
+        if(fileHandler.readRecipes() != null){
+        ArrayList<String> food = fileHandler.readRecipes();
+        System.out.println("Recipes:");
+        for(int i = 0; i < food.size(); i++){
+            String[] foods = food.get(i).split(",");
+            System.out.println("-----------------------------------");
+            System.out.println("Recipe Name: " + foods[0]);
+            System.out.print("Main Ingredients: " );
+        
+        
+        for(int j = 1; j < foods.length; j++){
+            
+            System.out.print(foods[j] + ", ");
+        }
+        System.out.println();
+    }
+    System.out.println("-----------------------------------");
+}else{
+    System.out.println("No recipes available.");
+}
     }
 
     /**
@@ -72,6 +92,9 @@ public class RecipeUI {
      * @throws java.io.IOException 入出力が受け付けられない
      */
     private void addNewRecipe() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        
+        
 
     }
 
