@@ -39,11 +39,13 @@ public class RecipeUI {
                     case "1":
                     displayRecipes();
                         break;
+
                     case "2":
-                        // 設問2: 新規登録機能
+                    addNewRecipe();
                         break;
+                        
                     case "3":
-                        // 設問3: 検索機能
+                    searchRecipe();
                         break;
                     case "4":
                         System.out.println("Exit the application.");
@@ -93,7 +95,13 @@ public class RecipeUI {
      */
     private void addNewRecipe() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        
+        System.out.print("Enter recipe name: ");
+        String recipeName = reader.readLine();
+        System.out.print("Enter main ingredients ");
+        String ingredients = reader.readLine();
+        fileHandler.addRecipe(recipeName, ingredients);
+        System.out.println("Recipe added successfully.");
+
         
 
     }

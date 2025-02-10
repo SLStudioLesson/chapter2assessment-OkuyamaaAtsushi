@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.File;
+
 
 public class RecipeFileHandler {
     private String filePath;
@@ -18,7 +18,7 @@ public class RecipeFileHandler {
     public RecipeFileHandler(String filePath) {
         this.filePath = filePath;
     }
-    File file = new File(this.filePath);
+    
 
     /**
      * 設問1: 一覧表示機能
@@ -56,12 +56,38 @@ public class RecipeFileHandler {
      */
      // 
     public void addRecipe(String recipeName, String ingredients) {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath))) {
-            if(file.exists()){
-            writer.write(readRecipes() + this.filePath);
+
+        String line;
+        ArrayList<String> food = new ArrayList<>();
+        try(BufferedReader reader = new BufferedReader(new FileReader(this.filePath))){
+      
+            while((line = (reader.readLine())) != null){
+                
+                String[] foods = line.split(",");
+                
+                    food.add(line);
+
+  
             }
         } catch (IOException e) {
+            System.out.println("Error reading file:" + e.getMessage());
+        }
+        String text = "";
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath))) {
+            text = recipeName + "," + ingredients;
+            String f = "";
+            for(String menu : food){
+                f += menu + "\n";
+            
+            }
+                
+            writer.write( f  + text);
+                
 
+        } catch (IOException e) {
+            System.out.println("Error reading file:" + e.getMessage());
         }
     }
+    
 }
+
